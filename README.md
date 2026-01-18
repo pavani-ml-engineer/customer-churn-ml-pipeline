@@ -28,4 +28,9 @@ The final model achieved stable performance with improved recall on churned cust
 2. Run baseline training:
    python src/train_baseline.py
 
+   ## Notes
+- The trained baseline pipeline is saved to `models/baseline_logreg_pipeline.joblib` after training.
+- Since churn is cost-sensitive, the prediction threshold was tuned (example: 0.35) to improve recall on churned customers.
+
+
 
