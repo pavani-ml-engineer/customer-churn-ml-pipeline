@@ -17,3 +17,5 @@ Exploratory analysis will be performed locally and documented here for clarity a
 - Encode categorical variables
 - Analyze churn distribution
 - Identify high-impact features
+- Implement preprocessing in src/preprocess.py to keep notebooks clean
+
