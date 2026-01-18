@@ -27,3 +27,6 @@ The final model achieved stable performance with improved recall on churned cust
 1. Install dependencies: pandas, scikit-learn
 2. Run baseline training:
    python src/train_baseline.py
+
+ Install dependencies: pandas, scikit-learn, joblib
+
