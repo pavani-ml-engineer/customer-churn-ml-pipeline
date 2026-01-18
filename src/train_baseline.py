@@ -9,6 +9,8 @@ from data_loader import load_churn_data
 from preprocess import preprocess_telco
 from pathlib import Path
 import joblib
+import numpy as np
+
 
 
 def build_pipeline(cat_cols, num_cols):
@@ -51,10 +53,19 @@ def main():
     print(f"Saved model to: {model_path}")
 
 
-    preds = pipeline.predict(X_test)
+    # Predict probabilities (churn probability)
+y_probs = pipeline.predict_proba(X_test)[:, 1]
 
-    print(confusion_matrix(y_test, preds))
-    print(classification_report(y_test, preds))
+# Tune threshold for higher recall (business prefers catching churners)
+threshold = 0.35
+y_pred_tuned = (y_probs >= threshold).astype(int)
+
+print(f"Using threshold: {threshold}")
+print("Confusion Matrix:")
+print(confusion_matrix(y_test, y_pred_tuned))
+print("\nClassification Report:")
+print(classification_report(y_test, y_pred_tuned))
+
 
 
 if __name__ == "__main__":
