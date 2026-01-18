@@ -11,3 +11,9 @@ The goal of this step is to understand the dataset structure, feature types, and
 
 ## Notes
 Exploratory analysis will be performed locally and documented here for clarity and version control.
+## Next Steps
+- Convert TotalCharges to numeric
+- Handle missing values
+- Encode categorical variables
+- Analyze churn distribution
+- Identify high-impact features
