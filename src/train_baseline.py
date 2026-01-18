@@ -7,6 +7,8 @@ from sklearn.metrics import classification_report, confusion_matrix
 
 from data_loader import load_churn_data
 from preprocess import preprocess_telco
+from pathlib import Path
+import joblib
 
 
 def build_pipeline(cat_cols, num_cols):
@@ -40,6 +42,14 @@ def main():
 
     pipeline = build_pipeline(cat_cols, num_cols)
     pipeline.fit(X_train, y_train)
+        # Save trained model
+    models_dir = Path(__file__).resolve().parents[1] / "models"
+    models_dir.mkdir(parents=True, exist_ok=True)
+
+    model_path = models_dir / "baseline_logreg_pipeline.joblib"
+    joblib.dump(pipeline, model_path)
+    print(f"Saved model to: {model_path}")
+
 
     preds = pipeline.predict(X_test)
 
