@@ -23,3 +23,7 @@ The final model achieved stable performance with improved recall on churned cust
 - Model deployment using REST APIs
 - Monitoring model performance and data drift
 
+## How to Run (Local)
+1. Install dependencies: pandas, scikit-learn
+2. Run baseline training:
+   python src/train_baseline.py
