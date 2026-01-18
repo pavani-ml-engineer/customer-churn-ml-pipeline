@@ -66,6 +66,27 @@ print(confusion_matrix(y_test, y_pred_tuned))
 print("\nClassification Report:")
 print(classification_report(y_test, y_pred_tuned))
 
+# Simple feature importance (logistic regression coefficients)
+try:
+    ohe = pipeline.named_steps["preprocessor"].named_transformers_["cat"]
+    cat_feature_names = ohe.get_feature_names_out(cat_cols)
+    feature_names = list(num_cols) + list(cat_feature_names)
+
+    coefs = pipeline.named_steps["model"].coef_[0]
+    top_pos_idx = coefs.argsort()[-10:][::-1]
+    top_neg_idx = coefs.argsort()[:10]
+
+    print("\nTop features increasing churn probability:")
+    for i in top_pos_idx:
+        print(f"{feature_names[i]}: {coefs[i]:.4f}")
+
+    print("\nTop features decreasing churn probability:")
+    for i in top_neg_idx:
+        print(f"{feature_names[i]}: {coefs[i]:.4f}")
+except Exception as e:
+    print(f"\nFeature importance not available: {e}")
+
+
 
 
 if __name__ == "__main__":
